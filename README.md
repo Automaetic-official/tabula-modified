@@ -14,7 +14,7 @@ The original tabula-py is a simple Python wrapper of [tabula-java](https://githu
 Ensure you have a Java runtime and set the PATH for it.
 
 ```bash
-pip install https://github.com/Automaetic-official/tabula-modified
+pip install git+https://github.com/Automaetic-official/tabula-modified.git
 ```
 
 ### Usage
