@@ -2,7 +2,7 @@ import platform
 import unittest
 from unittest.mock import patch
 
-import tabula
+import tabula_modified
 
 
 class TestReadPdfJarPath(unittest.TestCase):
@@ -11,7 +11,7 @@ class TestReadPdfJarPath(unittest.TestCase):
 
     @patch("jpype.startJVM")
     def test_read_pdf_with_silent_true(self, jvm_func):
-        tabula.read_pdf(self.pdf_path, encoding="utf-8", silent=True)
+        tabula_modified.read_pdf(self.pdf_path, encoding="utf-8", silent=True)
 
         target_args = []
         if platform.system() == "Darwin":

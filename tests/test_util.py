@@ -2,15 +2,15 @@ import os
 import unittest
 from unittest.mock import MagicMock, patch
 
-import tabula
+import tabula_modified
 
 
 class TestUtil(unittest.TestCase):
     def setUp(self):
-        tabula.file_util.MAX_FILE_SIZE = 30
+        tabula_modified.file_util.MAX_FILE_SIZE = 30
 
     def test_environment_info(self):
-        self.assertEqual(tabula.environment_info(), None)
+        self.assertEqual(tabula_modified.environment_info(), None)
 
     @patch("tabula.file_util.shutil.copyfileobj")
     @patch("tabula.file_util.urlopen")
@@ -30,7 +30,7 @@ class TestUtil(unittest.TestCase):
         cm.geturl.return_value = uri
         mock_urlopen.return_value = cm
 
-        fname, _ = tabula.file_util.localize_file(uri, user_agent=user_agent)
+        fname, _ = tabula_modified.file_util.localize_file(uri, user_agent=user_agent)
         mock_fun.assert_called_with(uri, user_agent)
         self.addCleanup(os.remove, fname)
 
@@ -52,7 +52,7 @@ class TestUtil(unittest.TestCase):
         cm.geturl.return_value = uri
         mock_urlopen.return_value = cm
 
-        fname, _ = tabula.file_util.localize_file(uri)
+        fname, _ = tabula_modified.file_util.localize_file(uri)
         mock_urlopen.assert_called_with(expected_uri)
         self.addCleanup(os.remove, fname)
 
@@ -71,34 +71,34 @@ class TestUtil(unittest.TestCase):
         cm.geturl.return_value = uri
         mock_urlopen.return_value = cm
 
-        fname, _ = tabula.file_util.localize_file(uri)
+        fname, _ = tabula_modified.file_util.localize_file(uri)
         mock_urlopen.assert_called_with(uri)
         self.assertTrue(fname.endswith("123456789012345678901234567890.pdf"))
         self.addCleanup(os.remove, fname)
 
     def test_tabula_option_area_order(self):
         self.assertTrue(
-            type(tabula.util.TabulaOption(area=[2, 3, 4, 6]).build_option_list()), list
+            type(tabula_modified.util.TabulaOption(area=[2, 3, 4, 6]).build_option_list()), list
         )
         with self.assertRaises(ValueError):
-            tabula.util.TabulaOption(area=[3, 4, 1]).build_option_list()
+            tabula_modified.util.TabulaOption(area=[3, 4, 1]).build_option_list()
         with self.assertRaises(ValueError):
-            tabula.util.TabulaOption(area=[3, 4, 1, 2]).build_option_list()
+            tabula_modified.util.TabulaOption(area=[3, 4, 1, 2]).build_option_list()
         self.assertTrue(
-            type(tabula.util.TabulaOption(area=[[2, 3, 4, 6]]).build_option_list()),
+            type(tabula_modified.util.TabulaOption(area=[[2, 3, 4, 6]]).build_option_list()),
             list,
         )
         with self.assertRaises(ValueError):
-            tabula.util.TabulaOption(area=[[3, 4, 1]]).build_option_list()
+            tabula_modified.util.TabulaOption(area=[[3, 4, 1]]).build_option_list()
         with self.assertRaises(ValueError):
-            tabula.util.TabulaOption(area=[[3, 4, 1, 2]]).build_option_list()
+            tabula_modified.util.TabulaOption(area=[[3, 4, 1, 2]]).build_option_list()
 
     def test_tabula_option_columns_order(self):
         self.assertTrue(
-            type(tabula.util.TabulaOption(columns=[2, 3, 4]).build_option_list()), list
+            type(tabula_modified.util.TabulaOption(columns=[2, 3, 4]).build_option_list()), list
         )
         with self.assertRaises(ValueError):
-            tabula.util.TabulaOption(columns=[3, 4, 1]).build_option_list()
+            tabula_modified.util.TabulaOption(columns=[3, 4, 1]).build_option_list()
 
 
 if __name__ == "__main__":

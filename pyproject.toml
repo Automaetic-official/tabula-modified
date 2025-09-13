@@ -3,8 +3,8 @@ requires = ["setuptools>=45", "setuptools_scm[toml]>=6.2"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "tabula-py"
-description = "Simple wrapper for tabula-java, read tables from PDF into DataFrame"
+name = "tabula-modified"
+description = "Simple wrapper for tabula-java with fixed encoding: read tables from PDF into DataFrame"
 authors = [
   {name = "Aki Ariga", email = "chezou@gmail.com"}
 ]
@@ -52,7 +52,7 @@ doc = [
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/chezou/tabula-py"
+"Original Homepage" = "https://github.com/chezou/tabula-py"
 "Bug Reports" = "https://github.com/chezou/tabula-py/issues"
 "Funding" = "https://github.com/sponsors/chezou"
 
