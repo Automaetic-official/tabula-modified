@@ -361,7 +361,7 @@ def read_pdf(
         multiple_tables = False
 
         if output_format.lower() == "dataframe":
-            format = "dataframe"
+            pass
         elif output_format.lower() == "json":
             format = "JSON"
         else:
