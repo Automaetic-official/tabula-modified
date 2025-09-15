@@ -427,8 +427,9 @@ def read_pdf(
     else:
         _pandas_options["encoding"] = _pandas_options.get("encoding", encoding)
 
-        try:                                     # TODO: consider errors='replace' for output.encode
-            return [pd.read_csv(io.BytesIO(output.encode(encoding)), encoding=encoding, **_pandas_options)]     # read with BytesIO instead of StringIO to preserve encoding better
+        try:
+            # TODO: consider errors='replace' for output.encode
+            return [pd.read_csv(io.BytesIO(output.encode(encoding)),**_pandas_options)]     # read with BytesIO instead of StringIO to preserve encoding better
         except pd.errors.ParserError as e:
             message = "Error failed to create DataFrame with different column tables.\n"
             message += (
