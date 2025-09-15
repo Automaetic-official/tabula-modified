@@ -361,7 +361,7 @@ def read_pdf(
         multiple_tables = False
 
         if output_format.lower() == "dataframe":
-            pass
+            format = "dataframe"
         elif output_format.lower() == "json":
             format = "JSON"
         else:
@@ -427,8 +427,8 @@ def read_pdf(
     else:
         _pandas_options["encoding"] = _pandas_options.get("encoding", encoding)
 
-        try:
-            return [pd.read_csv(io.StringIO(output), **_pandas_options)]
+        try:                                     # TODO: consider errors='replace' for output.encode
+            return [pd.read_csv(io.BytesIO(output.encode(encoding)), encoding=encoding, **_pandas_options)]     # read with BytesIO instead of StringIO to preserve encoding better
         except pd.errors.ParserError as e:
             message = "Error failed to create DataFrame with different column tables.\n"
             message += (
